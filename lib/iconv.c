@@ -490,9 +490,9 @@ void iconvlist (int (*do_one) (unsigned int namescount,
         namesbuf[i++] = aliasbuf[j++].name;
       while (j < num_aliases && aliasbuf[j].encoding_index == ei);
       if (i > 1)
-        qsort(namesbuf, i, sizeof(const char *), compare_by_name);
+        qsort((void *)namesbuf, i, sizeof(const char *), compare_by_name);
       /* Call the callback. */
-      if (do_one(i,namesbuf,data))
+      if (do_one((unsigned int)i,namesbuf,data))
         break;
     }
   }
@@ -605,7 +605,7 @@ const char * iconv_canonicalize (const char * name)
       continue;
     }
     pool = stringpool;
-    ap = aliases_lookup(buf,bp-buf);
+    ap = aliases_lookup(buf,(unsigned int)(bp-buf));
     if (ap == NULL) {
       pool = stringpool2;
       ap = aliases2_lookup(buf);

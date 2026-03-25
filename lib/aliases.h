@@ -65,7 +65,7 @@ aliases_hash (register const char *str, register size_t len)
       922, 922, 922, 922, 922, 922, 922, 922, 922, 922,
       922, 922, 922, 922, 922, 922, 922, 922
     };
-  register unsigned int hval = len;
+  register unsigned int hval = (unsigned int)len;
 
   switch (hval)
     {
